@@ -867,8 +867,16 @@ Invoicing flows
 Identification type and number
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+<<<<<<< 53d0ab45cbadc6d9adcbb8681c6a52f5743ec212
 The P0S cashier can :ref:`create a new contact for a customer <pos/customers>` who requests an
 invoice from an open POS session.
+||||||| ea8fe0af326a8cd7da60264f37bdb55f2160848f
+The P0S cashier can :ref:`create a new contact for a customer <pos/use/customers>` who requests an
+invoice from an open POS session.
+=======
+The P0S cashier can :ref:`create a new contact for a customer <pos/use/customers>` who requests an
+invoice from the POS register.
+>>>>>>> 55b6fc6adea0c6d69dd97808f35e16cb07edcab6
 
 The *Ecuadorian Module for Point of Sale* adds two new fields to the contact creation form:
 :guilabel:`Identification Type` and :guilabel:`Tax ID`.
@@ -890,7 +898,13 @@ customer as :guilabel:`Consumidor Final` and generates an electronic invoice any
 .. note::
    If the client requests a credit note due to a return of this type of purchase, the credit note
    should be made using the client's real contact information. Credit notes cannot be created for
+<<<<<<< 53d0ab45cbadc6d9adcbb8681c6a52f5743ec212
    *Consumidor Final* and can be managed :ref:`directly from the POS session <pos/refund>`.
+||||||| ea8fe0af326a8cd7da60264f37bdb55f2160848f
+   *Consumidor Final* and can be managed :ref:`directly from the POS session <pos/use/refund>`.
+=======
+   *Consumidor Final* and can be managed :ref:`directly from the POS register <pos/use/refund>`.
+>>>>>>> 55b6fc6adea0c6d69dd97808f35e16cb07edcab6
 
 .. _localizations/ecuador/specific-customer:
 
@@ -902,4 +916,10 @@ with their fiscal information. This ensures the invoice is generated with accura
 
 .. note::
    If the client requests a credit note due to a return of this type of purchase, the credit note
+<<<<<<< 53d0ab45cbadc6d9adcbb8681c6a52f5743ec212
    and return process can be managed :ref:`directly from the POS session <pos/refund>`.
+||||||| ea8fe0af326a8cd7da60264f37bdb55f2160848f
+   and return process can be managed :ref:`directly from the POS session <pos/use/refund>`.
+=======
+   and return process can be managed :ref:`directly from the POS register <pos/use/refund>`.
+>>>>>>> 55b6fc6adea0c6d69dd97808f35e16cb07edcab6
