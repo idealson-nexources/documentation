@@ -2,188 +2,275 @@
 Philippines
 ===========
 
+.. _philippines/configuration:
+
 Configuration
 =============
 
-:ref:`Install <general/install>` the :guilabel:`🇵🇭 Philippines` :ref:`fiscal localization package
-<fiscal_localizations/packages>` to get all the default accounting features of the Philippine
-localization, such as a chart of accounts, taxes, and reports. These provide a base template to get
-started with using Philippine accounting.
+.. _philippines/modules:
+
+Modules installation
+--------------------
+
+:ref:`Install <general/install>` the following modules to get all the features of the Philippines
+localization:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Name
+     - Technical name
+     - Description
+   * - :guilabel:`Philippines - Accounting`
+     - `l10n_ph`
+     - This module includes the default
+       :ref:`fiscal localization package <fiscal_localizations/packages>`.
+   * - :guilabel:`Philippines - Accounting Reports`
+     - `l10n_ph_reports`
+     - This module includes the accounting reports for Philippines.
+   * - :guilabel:`Philippines Checks Layout`
+     - `l10n_ph_check_printing`
+     - This module includes the features required to enable the PCHC check format.
+
+.. _philippines/company:
+
+Company information
+-------------------
+
+To configure your company information, go to the :guilabel:`Contacts` app, search for your company,
+and select it. Then configure the following fields:
+
+- :guilabel:`Name`
+- :guilabel:`Address`, including the :guilabel:`City`, :guilabel:`State`, :guilabel:`Zip Code`,
+  and :guilabel:`Country`.
+
+  - In the :guilabel:`Street` field, enter the street name, number, and any additional address
+    information.
+  - In the :guilabel:`Street 2` field, enter the barangay.
+
+- :guilabel:`Tax ID`: Taxpayer Identification Number (TIN).
+- :guilabel:`RDO`: Revenue District Office code.
+- :guilabel:`Phone`
+- :guilabel:`Email`
 
 .. note::
-  - When creating a new database and selecting the `Philippines` as a country, the fiscal
-    localization module **Philippines - Accounting** is automatically installed.
-  - If the module is installed in an existing company, the **chart of accounts** and **taxes** will
-    *not* be replaced if there are already posted journal entries.
+   The :guilabel:`Tax ID` should follow the `NNN-NNN-NNN-NNNNN` format. The
+   :guilabel:`Company Branch code` corresponds to the last 3 to 5 digits of the entered Tax ID.
+   When not provided, it defaults to `000`.
 
-Chart of accounts and taxes
----------------------------
-
-A minimum configuration default chart of accounts is installed, and the following types of taxes are
-installed and linked to the relevant account:
-
-- Sales and Purchase VAT 12%
-- Sales and Purchase VAT Exempt
-- Sales and Purchase VAT Zero-Rated
-- Sales and Purchase Withholding
-
-For the withholding taxes (:menuselection:`Accounting --> Configuration --> Taxes`), there is an
-additional :guilabel:`Philippines ATC` field under the :guilabel:`Philippines` tab.
-
-.. image:: philippines/philippines-atc-code.png
-  :alt: Philippines ATC code field set on taxes.
-
-.. note::
-  Taxes' ATC codes are used for the :ref:`BIR 2307 <localizations/philippines/report-BIR1207>`,
-  :ref:`SAWT and QAP reports <localizations/philippines/report-QAP-SAWT>`. If a tax is created
-  manually, its ATC code must be added.
+.. _philippines/contacts:
 
 Contacts
---------
+========
 
-When a company or an individual (not belonging to a company) contact is located in the Philippines,
-fill in the :guilabel:`Tax ID` field with their `Taxpayer Identification Number (TIN)`.
+The Philippine localization utilizes specific fields on contacts to generate
+:abbr:`BIR (Bureau of Internal Revenue)` reports and files used for submission.
 
-For individuals not belonging to a company, identify them by using the following additional fields:
+The :guilabel:`Tax ID` field is used to register the :abbr:`TIN (tax identification number)` for
+both companies and individuals. Filling in this field is recommended to ensure the accuracy of :ref:`tax
+reports <philippines/reports/slsp>`.
 
-- :guilabel:`First Name`
-- :guilabel:`Middle Name`
-- :guilabel:`Last Name`
+For individuals not associated with a company, use the following additional fields to identify
+them:
 
-.. note::
-  For both :guilabel:`Company` and :guilabel:`Individual`, the TIN should follow the
-  `NNN-NNN-NNN-NNNNN` format. The branch code should follow the last digits of the TIN, or else it
-  can be left as `00000`.
+* **First Name**
+* **Middle Name**
+* **Last Name**
+
+.. _philippines/taxes:
+
+Taxes
+=====
+
+Default taxes are created automatically when the :guilabel:`Philippines - Accounting` (`l10n_ph`)
+and :guilabel:`Philippines - Accounting Reports` (`l10n_ph_reports`) modules are :ref:`installed
+<general/install>`. These :ref:`taxes <philippines/taxes>` are used to generate the :ref:`tax
+reports <philippines/reports>`.
+
+The following categories of :doc:`taxes <../accounting/taxes>` are installed and linked to the
+relevant account:
+
+- :guilabel:`Sales and Purchase VAT`: 12%
+- :guilabel:`Sales and Purchase VAT Zero-Rated`: 0%
+- :guilabel:`Sales and Purchase VAT Exempt`: Exempt
+- :guilabel:`Withholding Tax`: Expanded Withholding Tax (EWHT), Final Withholding Tax (FWHT), and
+  Withholding VAT (WVAT).
+
+.. tip::
+   Default taxes are pre-configured and mapped to the relevant reports. To create a new tax, it is
+   recommended to **duplicate** an existing one to preserve this configuration. To do so, select
+   the tax, click the :icon:`fa-cog` :guilabel:`(gear)` icon, and click :guilabel:`Duplicate`.
+
+.. _philippines/taxes/atc:
+
+ATC codes
+---------
+
+Each tax type includes a :guilabel:`Philippines` tab, where additional fields such as :guilabel:`ATC`
+(Alphanumeric Tax Code) are available for withholding taxes.
+
+ATC codes are essential for generating the **BIR 2307**, :guilabel:`SAWT`, and :guilabel:`QAP`
+reports. These codes ensure compliance with regulatory requirements.
+
+To configure a withholding tax, go to :menuselection:`Accounting --> Configuration --> Taxes`,
+select the tax, and fill in the :guilabel:`Philippines ATC` field under the :guilabel:`Philippines`
+tab.
+
+.. image:: philippines/philippines-atc.png
+   :alt: Tax ATC Code
+
+.. _philippines/reports:
 
 Reports
 =======
 
-.. _localizations/philippines/report-BIR1207:
+.. _philippines/reports/2550q:
+
+2550Q report
+------------
+
+The **BIR Form 2550Q** summarizes sales, purchases, output VAT, input VAT, and the resulting
+VAT payable or refundable for the period.
+
+To access it, navigate to :menuselection:`Accounting --> Reporting --> Tax Report`, click the
+:guilabel:`Report` button, and select **2550Q (PH)**.
+
+.. _philippines/reports/sawt_qap:
+
+SAWT and QAP reports
+--------------------
+
+To access these reports, navigate to :menuselection:`Accounting --> Reporting --> Tax Report`,
+click the :guilabel:`Report` button, and select **SAWT & QAP (PH)**.
+
+* **Summary of Alphalist of Withholding Taxes (SAWT)**: Displays all customer invoices that have
+  sales withholding taxes applied. This export is used as a supporting document for forms
+  **1701Q**, **1701**, **1702Q**, and **1702**.
+* **Quarterly Alphalist of Payees (QAP)**: Includes all vendor bills that have purchase
+  withholding taxes applied. This export is used as a supporting document for forms **1601EQ** and
+  **1604E**.
+
+.. note::
+   The generated file is based on the specific **period** selected in the report filter. For example,
+   while the **1601EQ** is a quarterly report, `.DAT` files submitted are on a monthly basis.
+   Ensure the filter is set to the correct month before exporting.
+
+.. _philippines/reports/sawt_qap/dat:
+
+Export DAT files
+~~~~~~~~~~~~~~~~
+
+Both SAWT and QAP reports can be exported in `.DAT` format, compatible with the BIR :abbr:`Alpha
+(Alphalist Data Entry and Validation)` module.
+
+#. On the report page, click the :icon:`fa-cog` :guilabel:`(gear)` icon.
+#. Click :guilabel:`Export SAWT & QAP`.
+#. In the wizard, choose the relevant :guilabel:`Attachment For (e.g., 1601EQ)` and click
+   :guilabel:`Export`.
+
+  .. image:: philippines/philippines-sawt-qap-dat.png
+    :alt: SAWT QAP .dat export
+
+.. _philippines/reports/slsp:
+
+SLSP reports
+------------
+
+The **SLSP (Summary lists of sales and purchases)** is an electronic schedule required from VAT‑registered taxpayers listing sales and
+purchase transactions.
+
+To access it, navigate to :menuselection:`Accounting --> Reporting --> Summary Lists of Sales and
+Purchases`.
+
+* **Summary List of Sales (SLS)**: Detailed sales per customer with amounts and output VAT.
+* **Summary List of Purchases (SLP)**: Detailed purchases per supplier with amounts and input VAT.
+
+.. note::
+   - The **Summary List of Purchases** report excludes import by default. To include import
+     transactions, use a :guilabel:`Including Importations` filter.
+
+     .. image:: philippines/philippines-slp-import.png
+        :alt: SLP Import filter
+
+   - The generated file is based on the specific **period** selected in the report filter. For
+     example, while the **2550Q** is a quarterly report, `.DAT` files submitted are on a monthly
+     basis. Ensure the filter is set to the correct month before exporting.
+
+.. _philippines/reports/slsp/dat:
+
+Export DAT files
+~~~~~~~~~~~~~~~~
+
+SLS and SLP reports can be exported in `.DAT` format, compatible with the :abbr:`BIR ReLiEf
+(Reconciliation of Listings for Enforcement)` module.
+
+#. On the report page, click the :icon:`fa-cog` :guilabel:`(gear)` icon.
+#. Click :guilabel:`Export SLSP`.
+#. In the wizard, choose the relevant :guilabel:`Attachment For` and click :guilabel:`Export`.
+
+.. image:: philippines/philippines-slsp-export.png
+   :alt: SLSP .dat export
+
+.. _philippines/reports/bir2307:
 
 BIR 2307 report
 ---------------
 
-**BIR 2307** reports, also known as `Certificate of Creditable Tax Withheld at Source
-<https://www.bir.gov.ph/bir-forms?tab=Certificates&idTag=BIR2307&datasetCode=3381&label=2307&type=TAB%20LINK>`_,
-can be generated for purchase orders and vendor payments with the applicable withholding taxes.
+The **BIR 2307**, or *Certificate of Creditable Tax Withheld at Source*, can be generated for
+:guilabel:`vendor bills` that include expanded withholding taxes.
 
-To generate a BIR 2307 report, select one or multiple vendor bills from the list view, and click
-:menuselection:`Action --> Download BIR 2307 XLS`.
+To generate a BIR 2307 report:
 
-.. image:: philippines/philippines-multi-bill.png
-  :alt: Multiple vendor bills selected with action to "Download BIR 2307 XLS".
+#. Select one or multiple vendor bills from the list view.
+#. Click :menuselection:`Action --> Download BIR 2307 XLS`.
+#. In the pop-up, review the selection and click :guilabel:`Generate`.
 
-.. tip::
-  The same action can be performed on a vendor bill from the form view.
-
-In the pop-up that opens, review the selection and click :guilabel:`Generate`.
-
-.. image:: philippines/philippines-generate.png
-  :alt: Pop up menu to generate BIR 2307 XLS file.
-
-This generates the `Form_2307.xls` file that lists all the vendor bill lines with the applicable
-withholding tax.
-
-The process above can also be used for a *single* vendor :doc:`payment <../accounting/payments>` if
-it is linked to one or more :doc:`vendor bills <../accounting/payments>` with applied withholding
-taxes.
+.. image:: philippines/philippines-2307.png
+   :alt: 2307 xls export
 
 .. note::
-  - If no withholding tax is applied, then the XLS file will not generate records for those vendor
-    bill lines.
-  - When grouping payments for multiple bills, Odoo splits the payments based on the contact. From
-    a payment, clicking :menuselection:`Action --> Download BIR 2307 XLS` generates a report that
-    only includes vendor bills related to that contact.
+   The XLS file generates records **only** for bill lines with **expanded withholding taxes** applied.
 
 .. important::
-  Odoo cannot generate the BIR 2307 PDF report or DAT files directly. The generated
-  :file:`Form_2307.xls` file can be exported to an *external* tool to convert it to BIR DAT or PDF
-  format.
+   Odoo does not generate the BIR 2307 PDF report natively. The exported
+   `Form_2307.xls` file can be used with an external tool to convert it to BIR DAT or PDF format.
 
-SLSP report
------------
+.. _philippines/payments:
 
-To access the :abbr:`SLSP (Summary List of Sales and Purchases)` report, go to
-:menuselection:`Accounting --> Reporting --> Summary List of Sales and Purchases`.
+Payments
+========
 
-Click the buttons at the top to display the desired report:
-
-- | :guilabel:`Sales` for the :abbr:`SLS (Summary List of Sales)` report.
-  | All customer invoices with the associated sales taxes applied are shown in this report.
-- | :guilabel:`Purchases` for the :abbr:`SLP (Summary List of Purchases)` report.
-  | All vendor bills with the associated purchase taxes applied are shown in this report.
-
-.. image:: philippines/slsp.png
-  :alt: SLSP Report
-
-By default, both reports exclude journal entries containing partners without a TIN number set and
-those with importation taxes set. To view or hide them, click :guilabel:`Options:` and select the
-required filter:
-
-- :guilabel:`Including Partners Without TIN`
-- :guilabel:`Including Importations`
-
-To export the :abbr:`SLSP (Summary List of Sales and Purchases)` report, click :guilabel:`Export
-SLSP`.
-
-.. important::
-  Odoo cannot generate the DAT files directly. The :guilabel:`Export SLSP` and :guilabel:`XLSX`
-  buttons are used to export an XLSX file, which can be processed using an *external* tool to
-  convert it to the DAT format.
-
-2550Q tax report
-----------------
-
-The tax report report is accessible by navigating to :menuselection:`Accounting --> Reporting -->
-Statement Reports --> Tax Report --> 2550Q(PH)`. The form is based on the latest *2550Q
-(Quarterly Value-Added Tax Return)* Jan. 2023 version.
-
-.. image:: philippines/2550Q.png
-  :alt: 2550Q Tax Report
-
-.. tip::
-  Most lines in the tax report are automatically computed based on the taxes. For more accurate
-  reporting and filing of the tax report, manual journal entries can also be mapped to the tax
-  report through preconfigured **Tax Grids** for each tax report line.
-
-.. important::
-  Odoo cannot generate the 2550Q BIR formatted PDF report directly. It should be used as a
-  reference when externally filing the form manually or online.
-
-.. _localizations/philippines/report-QAP-SAWT:
-
-QAP & SAWT reports
-------------------
-
-To access the :abbr:`QAP (Quarterly Alphalist of Payees)` and :abbr:`SAWT (Summary Alphalist of
-Withholding Tax)` reports, go to :menuselection:`Accounting --> Reporting --> Tax Return`, click
-the :icon:`fa-book` :guilabel:`Report:` button, and select :guilabel:`SAWT & QAP (PH)`.
-
-Click the buttons at the top to display the desired report:
-
-- | :guilabel:`SAWT` for the :abbr:`SAWT (Summary Alphalist of Withholding Tax)` report.
-  | All customer invoices with the associated sales witholding taxes applied are shown in this
-   report.
-- | :guilabel:`QAP` for the :abbr:`QAP (Quarterly Alphalist of Payees)` report.
-  | All vendor bills with the associated purchase witholding taxes applied are shown in this report.
-
-.. image:: philippines/philippines-sawt.png
-  :alt: SAWT & QAP Report
-
-To export the :abbr:`SAWT (Summary Alphalist of Withholding Tax)` and :abbr:`QAP (Quarterly
-Alphalist of Payees)` reports in XLSX format, click :guilabel:`Export SAWT & QAP`.
-
-.. important::
-  Odoo cannot generate the DAT files directly. The :guilabel:`Export SAWT & QAP` and
-  :guilabel:`XLSX` buttons are used to export an XLSX file, which can be processed using an
-  *external* tool to convert it to the DAT format.
+.. _philippines/check_printing:
 
 Check printing
-==============
+--------------
 
-The Philippine check print layout follows the latest :abbr:`PCHC (Philippine Clearing House
-Corporation)` standardized format. To enable check printing, go to :menuselection:`Accounting -->
-Configuration --> Settings`, enable :guilabel:`Checks` and set the :guilabel:`Check Layout` to
-`Print Check - PH`.
+The Philippines check print layout adheres to the **New Check Design Standards and Specifications**
+(CICS OM No. 23-040).
 
-Checks are printed using the :doc:`standard workflow <../accounting/payments/pay_checks>`.
+To activate check printing:
+
+#. Go to :menuselection:`Accounting --> Configuration --> Settings`.
+#. Enable the :guilabel:`Checks` option.
+#. Set the :guilabel:`Check Layout` to `Print Check - PH`.
+
+When paying a vendor bill via **Checks**, Odoo prompts you to enter the check number manually to
+match your physical check stock.
+
+.. image:: philippines/philippines-check-number.png
+   :alt: check number log
+
+.. seealso::
+   :doc:`../../finance/accounting/payments/pay_checks`
+
+.. _philippines/payment_providers:
+
+Payment providers
+=================
+
+Odoo supports two payment providers available for the Philippines: **Xendit** and **AsiaPay**.
+
+For detailed configuration instructions, refer to:
+
+- :doc:`../payment_providers/asiapay`
+- :doc:`../payment_providers/xendit`
