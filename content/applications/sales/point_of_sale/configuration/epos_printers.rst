@@ -24,23 +24,12 @@ To use an ePos printer in Point of Sale:
 Directly supported ePOS printers
 ================================
 
-The following ePOS printers are directly compatible with Odoo without needing an :doc:`IoT system
-</applications/general/iot/devices/printer>`.
+We strongly recommend using the **Epson TM-m30 i/ii/iii (Wi-Fi/Ethernet models only)**
+model, which has been tested by us.
 
-- Epson TM-m30 i/ii/iii (Wi-Fi/Ethernet models only; Recommended)
-- Epson TM-H6000IV-DT (Receipt printer only)
-- Epson TM-T70II-DT
-- Epson TM-T88V-DT
-- Epson TM-L90-i
-- Epson TM-T70-i
-- Epson TM-T82II-i
-- Epson TM-T83II-i
-- Epson TM-U220-i
-- Epson TM-m10
-- Epson TM-P20 (Wi-Fi® model)
-- Epson TM-P60II (Receipt: Wi-Fi® model)
-- Epson TM-P60II (Peeler: Wi-Fi® model)
-- Epson TM-P80 (Wi-Fi® model)
+However, other Epson Wi-Fi/Ethernet models compatible with **ePoS Protocol** should also work.
+
+Please keep in mind that the ePoS printer must be able to operate in HTTP mode.
 
 ePOS printers with IoT system integration
 =========================================
@@ -64,4 +53,5 @@ be compatible with Odoo:
    - Epson printers that connect via Bluetooth are **not compatible**.
 
 .. seealso::
-   :doc:`epos_ssc`
+   - :doc:`pos_lna`
+   - :doc:`epos_ssc`

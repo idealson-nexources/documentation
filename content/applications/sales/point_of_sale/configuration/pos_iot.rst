@@ -2,6 +2,11 @@
 IoT system connection
 =====================
 
+.. important::
+   Most printers can be used without IoT. This makes it easier to manage your IT equipment.
+   It is recommended to follow the new :doc:`Local Network Access<pos_lna>` method.
+.. _pos_lna:
+
 To connect the POS with an :doc:`IoT system </applications/general/iot>`:
 
 #. Make sure both the Point of Sale and Internet of Things (IoT) apps are installed on your
