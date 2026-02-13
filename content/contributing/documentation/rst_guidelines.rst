@@ -876,6 +876,126 @@ the rows and the second level represents the columns.
                - France
                - Turquoise
 
+.. _contributing/rst/list-tables-customization:
+
+Customization
+~~~~~~~~~~~~~
+
+Use specific parameters to adjust the appearance and layout of :ref:`list tables
+<contributing/rst/tables>`.
+
+.. _contributing/rst/tables-striped:
+
+Striped tables
+**************
+
+Use the `:class: table-striped` parameter to apply alternating row colors to a list table.
+
+.. list-table::
+   :class: o-showcase-table
+
+   * - .. list-table::
+          :class: table-striped
+          :header-rows: 1
+          :stub-columns: 1
+
+          * - Transaction
+            - Date
+            - Amount
+          * - Receipt 001
+            - 2024-01-10
+            - $150.00
+          * - Delivery 042
+            - 2024-01-12
+            - $85.00
+
+   * - .. code-block:: text
+
+          .. list-table::
+             :class: table-striped
+             :header-rows: 1
+             :stub-columns: 1
+
+             * - Transaction
+               - Date
+               - Amount
+             * - ...
+
+.. _contributing/rst/tables-widths:
+
+Widths
+******
+
+Use the `:widths:` parameter to manually define the width of each column. Using percentages (e.g.,
+`20 40 40`) totaling `100` allows for consistent rendering across screen sizes.
+
+.. tip::
+   - Do not use `:widths:` with the `auto` parameter as it may cause layout issues on mobile
+     devices.
+
+.. list-table::
+   :class: o-showcase-table
+
+   * - .. list-table::
+          :widths: 20 80
+          :header-rows: 1
+          :stub-columns: 1
+
+          * - ID
+            - Description
+          * - 101
+            - This column is much wider than the ID column.
+
+   * - .. code-block:: text
+
+          .. list-table::
+             :widths: 20 80
+             :header-rows: 1
+             :stub-columns: 1
+
+             * - ID
+               - Description
+
+.. _contributing/rst/tables-sticky:
+
+Sticky headers
+**************
+
+Use the `:class: table-sticky-header` parameter to freeze the header row at the top of the screen
+while scrolling through long tables.
+
+.. list-table::
+   :class: o-showcase-table
+
+   * - .. list-table::
+          :class: table-sticky-header
+          :header-rows: 1
+          :stub-columns: 1
+
+          * - Operation
+            - Status
+          * - Receipt validation
+            - Completed
+          * - Delivery validation
+            - Pending
+
+   * - .. code-block:: text
+
+          .. list-table::
+             :class: table-sticky-header
+             :header-rows: 1
+             :stub-columns: 1
+
+             * - Operation
+               - Status
+             * - ...
+
+.. tip::
+   - The `:class: table-striped` and `:class: table-sticky-header` parameters are only supported for
+     **list tables**; do not apply them to grid tables.
+
+.. _contributing/rst/grid-tables:
+
 Grid tables
 -----------
 
